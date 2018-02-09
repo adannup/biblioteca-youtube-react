@@ -1,0 +1,15 @@
+.video-list {
+  font-size: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 20px auto;
+  width: 85%;
+}
+
+.wrapper {
+  height: 900px;
+  position: relative;
+  overflow-y: scroll;
+  width: 100%;
+}

@@ -1,0 +1,27 @@
+.video {
+  margin-bottom: 20px;
+  width: 31%;
+}
+
+.iframe-video {
+  height: 22vh;
+  width: 100%;
+}
+
+.button-control {
+  border: 0;
+  background: rgba(255, 0, 0, 0.8);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+  padding: 8px 0;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  transition: 0.4s all ease-in-out;
+}
+
+.button-control:hover {
+  background: rgba(255, 0, 0, 0.6);
+}

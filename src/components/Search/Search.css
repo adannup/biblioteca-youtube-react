@@ -1,0 +1,11 @@
+.search-input {
+  box-shadow: 1px 1px 3px 0px #ccc;
+  border: 1px solid #ccc;
+  display: block;
+  font-family: sans-serif;
+  font-size: 16px;
+  margin: 20px auto;
+  outline: none;
+  padding: 10px 12px;
+  width: 80%;
+}
