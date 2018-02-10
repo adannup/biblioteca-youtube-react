@@ -9,10 +9,17 @@ const Video = props => (
       title={props.title}
       key={props.videoId}
       type="text/html"
-      src={`http://www.youtube.com/embed/${props.videoId}?autoplay=0`}
+      src={`https://www.youtube.com/embed/${props.videoId}?rel=0`}
       frameBorder="0"
+      allowFullScreen
     />
-    <Controls />
+    <Controls
+      title={props.title}
+      videoId={props.videoId}
+      onClickAddVideo={props.onClickAddVideo}
+      // onClickAddVideo={props.onClickAddVideo.bind(this, props.title)}
+      // onClickAddVideo={() => props.onClickAddVideo(props.title)}
+    />
   </div>
 );
 

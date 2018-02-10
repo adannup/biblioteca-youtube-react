@@ -14,6 +14,7 @@ const VideoList = props => {
       key={item.id.videoId}
       title={item.snippet.title}
       videoId={item.id.videoId}
+      onClickAddVideo={props.onClickAddVideo}
     />
   ));
 

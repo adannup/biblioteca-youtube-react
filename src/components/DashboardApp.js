@@ -8,24 +8,31 @@ let timeout;
 class Dashboard extends Component {
   state = {
     data: [],
+    favorites: [],
+    history: [],
     isFetched: false,
-  }
-
-  onHandleSearch = e => {
-    this.fetchSearch(e.target.value);
   }
 
   componentWillMount = () => {
     this.fetchSearch('');
   }
 
+  onHandleSearch = e => this.fetchSearch(e.target.value)
+
+  onClickAddVideo = obj => {
+    this.setState({
+      favorites: this.state.favorites.concat(obj),
+    });
+  }
+
   fetchSearch = query => {
-    const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&type=video&q=${query}&key=${API_KEY}`;
+    const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=9&type=video&q=${query}&key=${API_KEY}`;
 
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       this.setState({
         isFetched: false,
+        history: this.state.history.concat(query),
       });
 
       fetch(URL)
@@ -42,10 +49,14 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard-app">
-        <FavoritePanel />
+        <FavoritePanel
+          favorites={this.state.favorites}
+          history={this.state.history}
+        />
         <DashboardVideos
           data={this.state.data}
           onChangeSearch={this.onHandleSearch}
+          onClickAddVideo={this.onClickAddVideo}
           isFetched={this.state.isFetched}
         />
       </div>

@@ -5,12 +5,15 @@ import './DashboardVideos.css';
 
 class DashboardVideos extends Component {
   render() {
+    const { data, isFetched, onClickAddVideo } = this.props;
+
     return (
       <div className="dashboard-videos">
         <Search onChange={this.props.onChangeSearch} />
         <VideoList
-          data={this.props.data}
-          isFetched={this.props.isFetched}
+          data={data}
+          isFetched={isFetched}
+          onClickAddVideo={onClickAddVideo}
         />
       </div>
     );
