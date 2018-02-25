@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './buttons-control.css';
 
 class AddFavoriteVideo extends Component {
   handleAddVideo = () => {

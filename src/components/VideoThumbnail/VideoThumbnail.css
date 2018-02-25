@@ -1,0 +1,44 @@
+.video-thumbnail {
+  margin-bottom: 20px;
+  position: relative;
+  width: 31%;
+}
+
+.video-thumbnail a:before {
+  background: rgba(0, 0, 0, 0.6);
+  content: '';
+  top: 0;
+  bottom: 36px;
+  left: 0;
+  right: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.video-thumbnail a:after {
+  content: '';
+  position: absolute;
+  left: 45%;
+  top: 32%;
+  width: 0;
+  height: 0;
+  border-top: 32px solid transparent;
+  border-bottom: 32px solid transparent;
+  border-left: 60px solid rgba(255, 255, 255, 0.5);
+}
+
+.video-thumbnail a::after,
+.video-thumbnail a::before {
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+
+.video-thumbnail a:hover:before,
+.video-thumbnail a:hover:after {
+  transition: all 0.2s linear;
+  opacity: 1;
+}
+
+.img-thumbnail {
+  width: 100%;
+}

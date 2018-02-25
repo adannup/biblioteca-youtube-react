@@ -12,6 +12,7 @@ const VideoList = props => {
       title={item.snippet.title}
       image={item.snippet.thumbnails.medium}
       onClickAddVideo={props.onClickAddVideo}
+      onClickVideoThumbnail={props.onClickVideoThumbnail}
     />
   ));
 
@@ -37,6 +38,7 @@ VideoList.propTypes = {
   })).isRequired,
   isFetched: PropTypes.bool.isRequired,
   onClickAddVideo: PropTypes.func.isRequired,
+  onClickVideoThumbnail: PropTypes.func.isRequired,
 };
 
 export default VideoList;

@@ -18,7 +18,13 @@ class Dashboard extends Component {
 
   // Handle events
   onHandleSearch = e => this.onFetchSearch(e.target.value)
-  onClickAddVideo = obj => this.addFavoriteVideo(obj);
+  onClickAddVideo = obj => {
+    if (this.favoriteVideoExist(obj)) {
+      console.log('El video ya existe');
+    } else {
+      this.addFavoriteVideo(obj);
+    }
+  }
 
   onFetchSearch = query => {
     clearTimeout(this.timeout);
@@ -37,6 +43,12 @@ class Dashboard extends Component {
     }, 750);
   }
 
+  // Validate functions
+  favoriteVideoExist = video => {
+    const filteredVideoExist = this.state.favorites.filter(v => v.videoId === video.videoId);
+    return filteredVideoExist.length > 0;
+  }
+
   // Manipulate state
   addHistorySearch = query => {
     this.setState({
@@ -45,9 +57,9 @@ class Dashboard extends Component {
   }
 
   addFavoriteVideo = video => {
-    this.setState({
-      favorites: [...this.state.favorites, video],
-    });
+    this.setState(prevState => ({
+      favorites: [...prevState.favorites, video],
+    }));
   }
 
   addVideos = videos => {
