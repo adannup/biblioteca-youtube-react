@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class Controls extends Component {
+class AddFavoriteVideo extends Component {
   handleAddVideo = () => {
     this.props.onClickAddVideo({
       title: this.props.title,
@@ -13,4 +14,10 @@ class Controls extends Component {
   }
 }
 
-export default Controls;
+AddFavoriteVideo.propTypes = {
+  onClickAddVideo: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  videoId: PropTypes.string.isRequired,
+};
+
+export default AddFavoriteVideo;

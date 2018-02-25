@@ -1,0 +1,18 @@
+.favorite-video {
+  background: #FCFCFC;
+  border: 0;
+  border-bottom: 2px solid #FCFCFC;
+  border-radius: 0px 2px 2px 0px;
+  color: #666;
+  cursor: pointer;
+  padding: 13px 14px;
+  text-align: left;
+  transition: 0.3s all linear;
+  outline: none;
+  width: 100%;
+}
+
+.favorite-video:hover {
+  background: #FFF;
+  border-bottom: 2px solid red;
+}

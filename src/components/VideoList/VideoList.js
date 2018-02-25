@@ -1,22 +1,23 @@
 import React from 'react';
-import Video from './Video/Video'
+import PropTypes from 'prop-types';
+import VideoThumbnail from '../VideoThumbnail/VideoThumbnail';
 import Loading from '../Utils/Loader/Loading';
 import './VideoList.css';
 
 const VideoList = props => {
-  // console.log(props.data);
-  if (!props.isFetched) {
-    return <Loading />;
-  }
-
-  const videos = props.data.items.map(item => (
-    <Video
+  const videos = props.videos.map(item => (
+    <VideoThumbnail
       key={item.id.videoId}
-      title={item.snippet.title}
       videoId={item.id.videoId}
+      title={item.snippet.title}
+      image={item.snippet.thumbnails.medium}
       onClickAddVideo={props.onClickAddVideo}
     />
   ));
+
+  if (!props.isFetched) {
+    return <Loading />;
+  }
 
   return (
     <div className="wrapper">
@@ -25,6 +26,17 @@ const VideoList = props => {
       </div>
     </div>
   );
+};
+
+VideoList.propTypes = {
+  videos: PropTypes.arrayOf(PropTypes.shape({
+    etag: PropTypes.string,
+    id: PropTypes.object,
+    kind: PropTypes.string,
+    snippet: PropTypes.object,
+  })).isRequired,
+  isFetched: PropTypes.bool.isRequired,
+  onClickAddVideo: PropTypes.func.isRequired,
 };
 
 export default VideoList;

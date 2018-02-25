@@ -1,0 +1,39 @@
+.favorite-panel {
+  background: #FCFCFC;
+  box-shadow: 1px 1px 1px 1px #f1f1f1;
+  display: inline-block;
+  font-family: sans-serif;
+  position: relative;
+  height: 100vh;
+  width: 20%;
+}
+
+.favorite-container {
+  margin: 30px auto;
+  width: 100%;
+}
+
+.favorite__title {
+  color: #888;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  padding-left: 14px;
+}
+
+.favorite-history {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.favorite-history__item {
+  background: red;
+  border-radius: 2px;
+  color: #fff;
+  display: inline-block;
+  margin: 2px 4px;
+  padding: 4px 8px;
+}
