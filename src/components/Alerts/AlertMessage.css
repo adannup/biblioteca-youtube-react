@@ -1,0 +1,13 @@
+.alert-message {
+  background: rgba(0, 0, 0, 0.85);
+  color: #ccc;
+  font-family: sans-serif;
+  border-radius: 2px;
+  position: fixed;
+  top: 10px;
+  padding: 22px 0;
+  text-align: center;
+  width: 80%;
+  left: 10%;
+  z-index: 9999;
+}

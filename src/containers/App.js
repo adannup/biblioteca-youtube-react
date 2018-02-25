@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import fetchYoutubeAPI from '../utils';
 import DashboardVideos from '../components/DashboardVideos/DashboardVideos';
 import DashboardPanel from '../components/DashboardPanel/DashboardPanel';
+import AlertFavoriteExist from '../components/Alerts/AlertFavoriteExist';
 import './App.css';
 
 class Dashboard extends Component {
   state = {
+    alert: {
+      active: false,
+      favoriteVideo: {},
+    },
     videos: [],
     favorites: [],
     history: [],
@@ -20,7 +25,7 @@ class Dashboard extends Component {
   onHandleSearch = e => this.onFetchSearch(e.target.value)
   onClickAddVideo = obj => {
     if (this.favoriteVideoExist(obj)) {
-      console.log('El video ya existe');
+      this.handleAlertMessage(obj);
     } else {
       this.addFavoriteVideo(obj);
     }
@@ -41,6 +46,24 @@ class Dashboard extends Component {
           this.handleFetchData(true);
         });
     }, 750);
+  }
+
+  handleAlertMessage = video => {
+    this.setState(prevState => ({
+      alert: Object.assign({}, prevState.alert, {
+        active: true,
+        favoriteVideo: video,
+      }),
+    }));
+    clearTimeout(this.alert);
+    this.alert = setTimeout(() => {
+      this.setState(prevState => ({
+        alert: Object.assign({}, prevState.alert, {
+          active: false,
+          favoriteVideo: {},
+        }),
+      }));
+    }, 3000);
   }
 
   // Validate functions
@@ -75,6 +98,9 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="container">
+        {this.state.alert.active &&
+          <AlertFavoriteExist favoriteVideo={this.state.alert.favoriteVideo} />
+        }
         <div className="dashboard-app">
           <DashboardPanel
             favorites={this.state.favorites}
