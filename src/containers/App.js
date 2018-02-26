@@ -16,10 +16,12 @@ class Dashboard extends Component {
       isOpen: false,
       video: {},
     },
-    videos: [],
     favorites: [],
     history: [],
-    isFetched: false,
+    videosAPI: {
+      videos: [],
+      isFetched: false,
+    },
   }
 
   componentWillMount = () => {
@@ -110,12 +112,18 @@ class Dashboard extends Component {
 
   addVideos = videos => {
     this.setState({
-      videos,
+      videosAPI: Object.assign({}, this.state.videosAPI, {
+        videos,
+      }),
     });
   }
 
   handleFetchData = bool => {
-    this.setState({ isFetched: bool });
+    this.setState({
+      videosAPI: Object.assign({}, this.state.videosAPI, {
+        isFetched: bool,
+      }),
+    });
   }
 
   render() {
@@ -137,12 +145,12 @@ class Dashboard extends Component {
               onClickAddVideo={this.onClickAddVideo}
             /> :
             <DashboardVideos
-              videos={this.state.videos}
+              videos={this.state.videosAPI.videos}
               onChangeSearch={this.onHandleSearch}
               onClickAddVideo={this.onClickAddVideo}
               onHandleVideoPlayer={this.onHandleVideoPlayer}
               onCloseVideoPlayer={this.onCloseVideoPlayer}
-              isFetched={this.state.isFetched}
+              isFetched={this.state.videosAPI.isFetched}
             />
           }
         </div>
