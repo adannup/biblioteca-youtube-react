@@ -1,6 +1,6 @@
 const initialState = {
   isFetched: false,
-  video: [],
+  videos: [],
 };
 
 const videosAPIReducer = (state = initialState, action) => {
