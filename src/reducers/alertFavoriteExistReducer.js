@@ -1,4 +1,9 @@
-const alertFavoriteExistReducer = (state = {}, action) => {
+const intialState = {
+  active: false,
+  favoriteVideo: {},
+};
+
+const alertFavoriteExistReducer = (state = intialState, action) => {
   switch (action.type) {
     case 'ENABLE_ALERT_FAVORITE_EXIST':
       return {
@@ -8,7 +13,7 @@ const alertFavoriteExistReducer = (state = {}, action) => {
     case 'DISABLE_ALERT_FAVORITE_EXIST':
       return {
         active: false,
-        favoriteVideo: {},
+        favoriteVideo: action.video,
       };
     default:
       return state;
