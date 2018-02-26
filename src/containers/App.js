@@ -32,28 +32,18 @@ class Dashboard extends Component {
   onHandleSearch = e => this.onFetchSearch(e.target.value)
   onClickAddVideo = obj => {
     if (this.favoriteVideoExist(obj)) {
-      this.handleAlertMessage(obj);
+      this.onAlertMessage(obj);
     } else {
       this.addFavoriteVideo(obj);
     }
   }
 
-  onHandleVideoPlayer = video => {
-    this.setState({
-      videoPlayer: Object.assign({}, this.state.videoPlayer, {
-        isOpen: true,
-        video,
-      }),
-    });
+  onOpenVideoPlayer = video => {
+    this.handleVideoPlayer(true, video);
   }
 
   onCloseVideoPlayer = () => {
-    this.setState({
-      videoPlayer: Object.assign({}, this.state.videoPlayer, {
-        isOpen: false,
-        video: {},
-      }),
-    });
+    this.handleVideoPlayer(false, {});
   }
 
   onFetchSearch = query => {
@@ -73,21 +63,14 @@ class Dashboard extends Component {
     }, 750);
   }
 
-  handleAlertMessage = video => {
-    this.setState(prevState => ({
-      alert: Object.assign({}, prevState.alert, {
-        active: true,
-        favoriteVideo: video,
-      }),
-    }));
+  onAlertMessage = video => {
+    // Open alert message
+    this.handleAlertMessage(true, video);
+
     clearTimeout(this.alert);
     this.alert = setTimeout(() => {
-      this.setState(prevState => ({
-        alert: Object.assign({}, prevState.alert, {
-          active: false,
-          favoriteVideo: {},
-        }),
-      }));
+      // Close alert message
+      this.handleAlertMessage(false, {});
     }, 3000);
   }
 
@@ -126,6 +109,24 @@ class Dashboard extends Component {
     });
   }
 
+  handleVideoPlayer = (bool, video) => {
+    this.setState({
+      videoPlayer: Object.assign({}, this.state.videoPlayer, {
+        isOpen: bool,
+        video,
+      }),
+    });
+  };
+
+  handleAlertMessage = (bool, video) => {
+    this.setState(prevState => ({
+      alert: Object.assign({}, prevState.alert, {
+        active: bool,
+        favoriteVideo: video,
+      }),
+    }));
+  }
+
   render() {
     return (
       <div className="container">
@@ -136,7 +137,7 @@ class Dashboard extends Component {
           <DashboardPanel
             favorites={this.state.favorites}
             history={this.state.history}
-            onHandleVideoPlayer={this.onHandleVideoPlayer}
+            onHandleVideoPlayer={this.onOpenVideoPlayer}
           />
           {this.state.videoPlayer.isOpen ?
             <DashboardVideoPlayer
