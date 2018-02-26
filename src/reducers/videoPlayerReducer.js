@@ -10,6 +10,8 @@ const videoPlayerReducer = (state = initialState, action) => {
         isOpen: true,
         video: action.video,
       };
+    case 'CLOSE_VIDEO_PLAYER':
+      return state;
     default:
       return state;
   }

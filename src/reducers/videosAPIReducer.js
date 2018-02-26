@@ -5,11 +5,14 @@ const initialState = {
 
 const videosAPIReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'IS_FETCHED':
-      return {
-        isFetched: action.isFetched,
-        videos: action.videos,
-      };
+    case 'FETCH_VIDEOSAPI':
+      return Object.assign({}, state, {
+        videos: action.payload,
+      });
+    case 'FETCH_DATA':
+      return Object.assign({}, state, {
+        isFetched: action.payload,
+      });
     default:
       return state;
   }

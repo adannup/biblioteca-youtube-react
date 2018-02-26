@@ -1,11 +1,7 @@
 const favoriteVideosreducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_FAVORITE_VIDEO': {
-      const video = {
-        title: action.title,
-        videoId: action.videoId,
-      };
-      return [...state, video];
+      return [...state, action.video];
     }
     default:
       return state;
