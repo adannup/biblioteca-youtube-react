@@ -1,9 +1,11 @@
-const { createStore, combineReducers, applyMiddleware } = require('redux');
-const favoriteVideosReducer = require('./reducers/favoriteVideosReducer');
-const historySearchReducer = require('./reducers/historySearchReducer');
-const alertFavoriteExistReducer = require('./reducers/alertFavoriteExistReducer');
-const videoPlayerReducer = require('./reducers/videoPlayerReducer');
-const videosAPIReducer = require('./reducers/videosAPIReducer');
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import promise from 'redux-promise-middleware';
+import { createLogger } from 'redux-logger';
+import favoriteVideosReducer from './reducers/favoriteVideosReducer';
+import historySearchReducer from './reducers/historySearchReducer';
+import alertFavoriteExistReducer from './reducers/alertFavoriteExistReducer';
+import videoPlayerReducer from './reducers/videoPlayerReducer';
+import videosAPIReducer from './reducers/videosAPIReducer';
 
 const reducers = combineReducers({
   history: historySearchReducer,
@@ -13,12 +15,13 @@ const reducers = combineReducers({
   videosAPI: videosAPIReducer,
 });
 
-const store = createStore(reducers);
-console.log(store.getState());
-
-store.subscribe(() => {
-  console.log(store.getState());
-});
+const store = createStore(reducers, {}, applyMiddleware(createLogger(), promise()));
+export default store;
+// console.log(store.getState());
+//
+// store.subscribe(() => {
+//   console.log(store.getState());
+// });
 
 // store.dispatch({
 //   type: 'ADD_FAVORITE_VIDEO',

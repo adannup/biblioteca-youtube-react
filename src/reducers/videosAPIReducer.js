@@ -5,7 +5,7 @@ const initialState = {
 
 const videosAPIReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCH_VIDEOSAPI':
+    case 'FETCH_VIDEOSAPI_FULFILLED':
       return Object.assign({}, state, {
         videos: action.payload,
       });

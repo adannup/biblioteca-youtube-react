@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/App';
+import ReduxApp from './ReduxApp';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<ReduxApp />, document.getElementById('root'));
 registerServiceWorker();

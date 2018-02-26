@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+// components
 import fetchYoutubeAPI from '../utils';
 import DashboardVideos from '../components/DashboardVideos/DashboardVideos';
 import DashboardPanel from '../components/DashboardPanel/DashboardPanel';
 import DashboardVideoPlayer from '../components/DashboardVideoPlayer/DashboardVideoPlayer';
 import AlertFavoriteExist from '../components/Alerts/AlertFavoriteExist';
 import './App.css';
+// Actions
+import { addVideosAPI, fetchData } from '../actions/videosAPIActions';
 
 class Dashboard extends Component {
   state = {
@@ -18,10 +22,6 @@ class Dashboard extends Component {
     },
     favorites: [],
     history: [],
-    videosAPI: {
-      videos: [],
-      isFetched: false,
-    },
   }
 
   componentWillMount = () => {
@@ -54,11 +54,14 @@ class Dashboard extends Component {
         this.addHistorySearch(query);
       }
 
-      this.handleFetchData(false);
+      // this.handleFetchData(false);
+      this.props.fetchData(false);
       fetchYoutubeAPI(query)
         .then(data => {
-          this.addVideos(data.items);
-          this.handleFetchData(true);
+          // this.addVideos(data.items);
+          this.props.addVideosAPI(data.items);
+          // this.handleFetchData(true);
+          this.props.fetchData(true);
         });
     }, 750);
   }
@@ -146,12 +149,12 @@ class Dashboard extends Component {
               onClickAddVideo={this.onClickAddVideo}
             /> :
             <DashboardVideos
-              videos={this.state.videosAPI.videos}
+              videos={this.props.videosAPI.videos}
               onChangeSearch={this.onHandleSearch}
               onClickAddVideo={this.onClickAddVideo}
               onHandleVideoPlayer={this.onOpenVideoPlayer}
               onCloseVideoPlayer={this.onCloseVideoPlayer}
-              isFetched={this.state.videosAPI.isFetched}
+              isFetched={this.props.videosAPI.isFetched}
             />
           }
         </div>
@@ -160,4 +163,14 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  videosAPI: state.videosAPI,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addVideosAPI: videos => dispatch(addVideosAPI(videos)),
+  fetchData: bool => dispatch(fetchData(bool)),
+});
+
+// export default Dashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
