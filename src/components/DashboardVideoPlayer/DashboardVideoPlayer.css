@@ -1,3 +1,9 @@
+.container-dashboard-video-player {
+  display: inline-block;
+  vertical-align: top;
+  width: 80%;
+}
+
 .dashboard-video-player {
   margin: 0 auto;
   margin-top: 40px;

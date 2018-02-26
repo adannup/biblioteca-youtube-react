@@ -9,6 +9,7 @@ const FavoriteVideoList = props => {
       key={favorite.videoId}
       title={favorite.title}
       videoId={favorite.videoId}
+      onHandleVideoPlayer={props.onHandleVideoPlayer}
     />
   ));
 
@@ -24,6 +25,7 @@ FavoriteVideoList.propTypes = {
     videoId: PropTypes.string,
     title: PropTypes.string,
   })).isRequired,
+  onHandleVideoPlayer: PropTypes.func.isRequired,
 };
 
 export default FavoriteVideoList;

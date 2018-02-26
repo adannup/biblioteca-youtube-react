@@ -8,7 +8,10 @@ const DashboardPanel = props => (
   <div className="favorite-panel">
     <div className="favorite-container">
       <h3 className="favorite__title">Biblioteca</h3>
-      <FavoriteVideoList favorites={props.favorites} />
+      <FavoriteVideoList
+        onHandleVideoPlayer={props.onHandleVideoPlayer}
+        favorites={props.favorites}
+      />
       <HistoryList history={props.history} />
     </div>
   </div>
@@ -20,6 +23,7 @@ DashboardPanel.propTypes = {
     videoId: PropTypes.string,
   })).isRequired,
   history: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onHandleVideoPlayer: PropTypes.func.isRequired,
 };
 
 export default DashboardPanel;

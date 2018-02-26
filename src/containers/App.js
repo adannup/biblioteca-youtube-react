@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import fetchYoutubeAPI from '../utils';
 import DashboardVideos from '../components/DashboardVideos/DashboardVideos';
 import DashboardPanel from '../components/DashboardPanel/DashboardPanel';
+import DashboardVideoPlayer from '../components/DashboardVideoPlayer/DashboardVideoPlayer';
 import AlertFavoriteExist from '../components/Alerts/AlertFavoriteExist';
 import './App.css';
 
@@ -10,6 +11,10 @@ class Dashboard extends Component {
     alert: {
       active: false,
       favoriteVideo: {},
+    },
+    videoPlayer: {
+      isOpen: false,
+      video: {},
     },
     videos: [],
     favorites: [],
@@ -29,6 +34,24 @@ class Dashboard extends Component {
     } else {
       this.addFavoriteVideo(obj);
     }
+  }
+
+  onHandleVideoPlayer = video => {
+    this.setState({
+      videoPlayer: Object.assign({}, this.state.videoPlayer, {
+        isOpen: true,
+        video,
+      }),
+    });
+  }
+
+  onCloseVideoPlayer = () => {
+    this.setState({
+      videoPlayer: Object.assign({}, this.state.videoPlayer, {
+        isOpen: false,
+        video: {},
+      }),
+    });
   }
 
   onFetchSearch = query => {
@@ -105,13 +128,23 @@ class Dashboard extends Component {
           <DashboardPanel
             favorites={this.state.favorites}
             history={this.state.history}
+            onHandleVideoPlayer={this.onHandleVideoPlayer}
           />
-          <DashboardVideos
-            videos={this.state.videos}
-            onChangeSearch={this.onHandleSearch}
-            onClickAddVideo={this.onClickAddVideo}
-            isFetched={this.state.isFetched}
-          />
+          {this.state.videoPlayer.isOpen ?
+            <DashboardVideoPlayer
+              video={this.state.videoPlayer.video}
+              onClickReturnButton={this.onCloseVideoPlayer}
+              onClickAddVideo={this.onClickAddVideo}
+            /> :
+            <DashboardVideos
+              videos={this.state.videos}
+              onChangeSearch={this.onHandleSearch}
+              onClickAddVideo={this.onClickAddVideo}
+              onHandleVideoPlayer={this.onHandleVideoPlayer}
+              onCloseVideoPlayer={this.onCloseVideoPlayer}
+              isFetched={this.state.isFetched}
+            />
+          }
         </div>
       </div>
     );
