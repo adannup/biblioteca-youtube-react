@@ -149,7 +149,7 @@ class Dashboard extends Component {
               videos={this.state.videosAPI.videos}
               onChangeSearch={this.onHandleSearch}
               onClickAddVideo={this.onClickAddVideo}
-              onHandleVideoPlayer={this.onHandleVideoPlayer}
+              onHandleVideoPlayer={this.onOpenVideoPlayer}
               onCloseVideoPlayer={this.onCloseVideoPlayer}
               isFetched={this.state.videosAPI.isFetched}
             />
