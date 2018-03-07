@@ -4,3 +4,6 @@
 <!-- http://www.reactjunkie.com/demistifying-es6-class-method-and-property-initializer-arrow-function/ -->
 <!-- https://medium.freecodecamp.org/why-arrow-functions-and-bind-in-reacts-render-are-problematic-f1c08b060e36 -->
 <!-- http://johnnyji.me/react/2016/06/27/why-arrow-functions-murder-react-performance.html -->
+
+## Diagram Components & Containers
+![Diagram XML](diagram_xml.png)
